@@ -59,7 +59,6 @@ def k_means(data, k, max_iters=100):
     return labels, centroids, clusters
 
 # Compute WCSS for the elbow method
-# wcss = optimal k-sizes
 def compute_wcss(data, labels, centroids):
     wcss = 0
     for i, centroid in enumerate(centroids):
@@ -90,15 +89,14 @@ def elbow_method(data, max_k=10, threshold=0.5):
 
     percentage_drops = [(wcss_values[i - 1] - wcss_values[i]) / wcss_values[i - 1] for i in range(1, len(wcss_values))]
 
-    # Determine the optimal k based on threshold for significant percentage drop
     for i, drop in enumerate(percentage_drops):
-        if drop < threshold:  # If drop becomes smaller than the threshold, we've found the elbow
+        if drop < threshold:  
             optimal_k = i + 1
             break
     else:
-        print("Most Optimal K was  Not Found")
+        print("Most Optimal K was Not Found")
     
-    print(f"Optimal number of clusters (k) determined automatically: {optimal_k}")
+    print(f"Optimal number of clusters (k): {optimal_k}")
     return wcss_values, optimal_k
 
 # Find the optimal k using the elbow method
